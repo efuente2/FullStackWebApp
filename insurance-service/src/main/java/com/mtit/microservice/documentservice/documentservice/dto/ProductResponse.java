@@ -16,5 +16,5 @@ public class ProductResponse {
     private int price;
     private String category;
     private String description;
-    private String image;
+    private byte[] image;
 }

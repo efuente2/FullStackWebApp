@@ -29,8 +29,9 @@ public class Product {
     @Column(name = "description")
     public String Description;
 
-    @Column(name = "image")
-    public String image;
+    @Lob
+    @Column(name = "image", length = 1000)
+    private byte[] image;
 
     public String getDescription() {return Description;}
 
@@ -44,7 +45,7 @@ public class Product {
 
     public String getCategory(){return Category;}
 
-    public String getImage(){return image;}
+    public byte[] getImage(){return image;}
 
 
 

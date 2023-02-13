@@ -8,12 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
 @Slf4j
@@ -24,13 +29,13 @@ public class ProductService {
     @Autowired
     private WebClient.Builder webClient;
 
-    public void newTransaction (ProductRequest paymentRequest){
+    public void newTransaction (ProductRequest paymentRequest, MultipartFile file) throws IOException {
         Product product = Product.builder()
                 .id(paymentRequest.getId())
                 .Price(paymentRequest.getPrice())
                 .Title(paymentRequest.getTitle())
                 .Category(paymentRequest.getCategory())
-                .image(paymentRequest.getImage())
+                .image(CompressImage(file.getBytes()))
                 .build();
 
 
@@ -39,16 +44,55 @@ public class ProductService {
 
     }
 
-    public List<Product> getAllClaims(){
+    private byte[] CompressImage(byte[] data) {
+        Deflater deflater = new Deflater();
+        deflater.setLevel(Deflater.BEST_COMPRESSION);
+        deflater.setInput(data);
+        deflater.finish();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] tmp = new byte[4*1024];
+        while (!deflater.finished()){
+            int count = deflater.deflate(tmp);
+            outputStream.write(tmp, 0, count);
+        }
+        try {
+            outputStream.close();}
+        catch (Exception ignored) {
+
+        }
+        return outputStream.toByteArray();
+    }
+
+    public static byte[] decompressImage(byte[] data){
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] tmp = new byte[4*1024];
+        try{
+            while (!inflater.finished()){
+                int count = inflater.inflate(tmp);
+                outputStream.write(tmp, 0, count);
+            }
+            outputStream.close();
+        }
+        catch (Exception ignored) {
+        }
+        return outputStream.toByteArray();
+    }
+
+
+    public List<ProductResponse> getAllClaims(){
         List<Product> productList = productRepositroy.findAll();
 
-        return productList;
+        //return productList;
 
-        //return productList.stream().map(this::mapToClaimResponse).toList();
+        return productList.stream().map(this::mapToClaimResponse).toList();
     }
 
     private ProductResponse mapToClaimResponse(Product product) {
         log.info("Product " + product.getId() + " was retrieved");
+
 
         return ProductResponse.builder()
                 .id(product.getId())
@@ -56,7 +100,7 @@ public class ProductService {
                 .price(product.getPrice())
                 .category(product.getCategory())
                 .description(product.getDescription())
-                .image(product.getImage())
+                .image(decompressImage(product.getImage()))
                 .build();
     }
 

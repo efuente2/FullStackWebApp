@@ -7,7 +7,9 @@ import com.mtit.microservice.documentservice.documentservice.util.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,18 +22,18 @@ public class ProductController {
 
     @GetMapping("/login")
     public String login(){
-        return "Welcome to Claims Service";
+        return "Welcome to My WEB API";
     }
 
     @PostMapping("/Product")
     @ResponseStatus(HttpStatus.CREATED)
-    public void newClaim(@RequestBody ProductRequest paymentRequest){
-            paymentService.newTransaction(paymentRequest);
+    public void newClaim(@RequestBody ProductRequest paymentRequest, @RequestParam("file")MultipartFile file) throws IOException {
+            paymentService.newTransaction(paymentRequest, file);
     }
     
     @GetMapping("/Product")
     @ResponseStatus(HttpStatus.OK)
-    public List<Product> getAllClaims(){
+    public List<ProductResponse> getAllClaims(){
         return paymentService.getAllClaims();
     }
 
