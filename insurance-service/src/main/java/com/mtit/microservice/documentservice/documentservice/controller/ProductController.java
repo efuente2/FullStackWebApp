@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ClaimsController {
+public class ProductController {
 
     @Autowired
     private ProductService paymentService;

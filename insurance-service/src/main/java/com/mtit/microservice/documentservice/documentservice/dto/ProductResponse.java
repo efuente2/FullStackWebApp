@@ -12,10 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductResponse {
     private int id;
-    private String name;
-    private String email;
-    private String amount;
-    private String date;
-    private String claimId;
-    private String status;
+    private String title;
+    private int price;
+    private String category;
+    private String description;
+    private String image;
 }

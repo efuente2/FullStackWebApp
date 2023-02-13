@@ -25,41 +25,38 @@ public class ProductService {
     private WebClient.Builder webClient;
 
     public void newTransaction (ProductRequest paymentRequest){
-        Product claim = Product.builder()
-                //.id(paymentRequest.getId())
-                .name(paymentRequest.getName())
-                .email(paymentRequest.getEmail())
-                .amount(paymentRequest.getAmount())
-                .date(paymentRequest.getDate())
-                .claimId(paymentRequest.getClaimId())
-                .status(paymentRequest.getStatus())
+        Product product = Product.builder()
+                .id(paymentRequest.getId())
+                .Price(paymentRequest.getPrice())
+                .Title(paymentRequest.getTitle())
+                .Category(paymentRequest.getCategory())
+                .image(paymentRequest.getImage())
                 .build();
 
 
-            productRepositroy.save(claim);
-            log.info("Product " + claim.getId() + " is saved");
+            productRepositroy.save(product);
+            log.info("Product " + product.getId() + " is saved");
 
     }
 
     public List<Product> getAllClaims(){
-        List<Product> paymentList = productRepositroy.findAll();
+        List<Product> productList = productRepositroy.findAll();
 
-        return paymentList;
+        return productList;
 
-        //return paymentList.stream().map(this::mapToClaimResponse).toList();
+        //return productList.stream().map(this::mapToClaimResponse).toList();
     }
 
-    private ProductResponse mapToClaimResponse(Product payment) {
-        log.info("Product " + payment.getId() + " was retrieved");
+    private ProductResponse mapToClaimResponse(Product product) {
+        log.info("Product " + product.getId() + " was retrieved");
 
         return ProductResponse.builder()
-                .id(payment.getId())
-                .name(payment.getName())
-                .email(payment.getEmail())
-                .amount(payment.getAmount())
-                .date(payment.getDate())
-                .claimId(payment.getClaimId())
-                .status(payment.getStatus())
+                .id(product.getId())
+                .title(product.getTitle())
+                .price(product.getPrice())
+                .category(product.getCategory())
+                .description(product.getDescription())
+                .image(product.getImage())
                 .build();
     }
 

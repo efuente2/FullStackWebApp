@@ -10,50 +10,41 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "payment")
+@Table(name = "Products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "amount")
-    private String amount;
+    @Column(name = "title")
+    private String Title;
 
-    @Column(name = "date")
-    private String date;
+    @Column(name = "price")
+    private int Price;
 
-    @Column(name = "claimId")
-    public String claimId;
+    @Column(name = "category")
+    public String Category;
 
-    @Column(name = "name")
-    public String name;
+    @Column(name = "description")
+    public String Description;
 
-    @Column(name = "email")
-    public String email;
+    @Column(name = "image")
+    public String image;
 
-    @Column(name = "status")
-    public String status;
-
-    public String getStatus() {return status;}
-
-    public void setStatus(String status) {this.status = status;}
-
-    public String getName() {return name;}
-
-    public String getEmail() {return email;}
+    public String getDescription() {return Description;}
 
     public int getId(){return id;}
 
-    public  String getAmount(){
-        return amount;
+    public  String getTitle(){
+        return Title;
     }
 
-    public String getDate(){
-        return date;
-    }
+    public int getPrice(){return Price;}
 
-    public String getClaimId(){return claimId;}
+    public String getCategory(){return Category;}
+
+    public String getImage(){return image;}
 
 
 
