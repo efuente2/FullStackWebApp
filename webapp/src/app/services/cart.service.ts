@@ -8,6 +8,8 @@ import { Cart, CartItem } from '../models/cart.model';
 })
 export class CartService {
 
+  ADMINLOGIN = false;
+
   cart = new BehaviorSubject<Cart>({ items: [] });
 
   constructor(private _snackbar: MatSnackBar) { }
@@ -72,4 +74,8 @@ export class CartService {
 
   return filteredItems;
 }
+
+    setLoginStatus(status: boolean): void{
+    this.ADMINLOGIN = status;
+    }
 }

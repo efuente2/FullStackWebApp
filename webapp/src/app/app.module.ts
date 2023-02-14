@@ -27,7 +27,11 @@ import { CartService } from './services/cart.service';
 import { StoreService } from './services/store.service';
 import { HttpClientModule } from '@angular/common/http';
 import {LayoutModule} from '@angular/cdk/layout';
-import { StartComponent } from './start/start/start.component'; 
+import { StartComponent } from './start/start/start.component';
+import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { StartComponent } from './start/start/start.component';
     FiltersComponent,
     ProductBoxComponent,
     CartComponent,
-    StartComponent
+    StartComponent,
+    LoginComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,8 @@ import { StartComponent } from './start/start/start.component';
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [CartService,StoreService],
   bootstrap: [AppComponent]
