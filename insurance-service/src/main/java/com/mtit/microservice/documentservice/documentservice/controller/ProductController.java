@@ -1,7 +1,9 @@
 package com.mtit.microservice.documentservice.documentservice.controller;
 
+import com.mtit.microservice.documentservice.documentservice.dto.FromRequest;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductResponse;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductRequest;
+import com.mtit.microservice.documentservice.documentservice.service.FormService;
 import com.mtit.microservice.documentservice.documentservice.service.ProductService;
 import com.mtit.microservice.documentservice.documentservice.util.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,18 @@ public class ProductController {
     @Autowired
     private ProductService paymentService;
 
+    @Autowired
+    private FormService formService;
+
     @GetMapping("/login")
     public String login(){
         return "Welcome to My WEB API";
+    }
+
+    @PostMapping("/contact")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void formSubmition(@RequestBody FromRequest fromRequest) throws IOException {
+        formService.formSubmission(fromRequest);
     }
 
     @PostMapping("/Product")
