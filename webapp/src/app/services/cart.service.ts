@@ -75,7 +75,12 @@ export class CartService {
   return filteredItems;
 }
 
-    setLoginStatus(status: boolean): void{
+setLoginStatus(status: boolean): void{
     this.ADMINLOGIN = status;
-    }
+}
+
+getAdminLoginStatus(): boolean{
+    return this.ADMINLOGIN;
+}         
+
 }

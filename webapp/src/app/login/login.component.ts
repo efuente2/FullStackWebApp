@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
 import { RestLoginService } from '../services/rest-login.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   password!: string;
   message: any; 
 
-  constructor(private service: RestLoginService, private router:Router){}
+  constructor(private service: RestLoginService, private router:Router, private cartservice: CartService){}
 
     ngOnInit(){
     }
@@ -22,8 +23,11 @@ export class LoginComponent implements OnInit {
     let resp = this.service.login(this.username, this.password);
     resp.subscribe(data=>{
       this.message = data;
+      console.log(this.message);
       this.router.navigate(["/home"])
     })
+
+    this.cartservice.setLoginStatus(true);
   }
 
 }

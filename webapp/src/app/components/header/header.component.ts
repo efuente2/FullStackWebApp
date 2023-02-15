@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class HeaderComponent {
   private _cart: Cart = { items: [] };
   itemsQuantity = 0;
+  ADMINLOGIN: boolean = this.cartService.getAdminLoginStatus();
 
   @Input() 
   get cart(): Cart{
