@@ -30,6 +30,7 @@ public class Form {
     @Column(name = "message")
     public String Message;
 
+    public int getId(){return id;}
     public String getName() {return Name;}
     public String getEmail() {return Email;}
     public String getSubject() {return Subject;}

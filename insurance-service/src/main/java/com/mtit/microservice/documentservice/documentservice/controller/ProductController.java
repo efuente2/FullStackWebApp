@@ -1,6 +1,7 @@
 package com.mtit.microservice.documentservice.documentservice.controller;
 
-import com.mtit.microservice.documentservice.documentservice.dto.FromRequest;
+import com.mtit.microservice.documentservice.documentservice.dto.FormRequest;
+import com.mtit.microservice.documentservice.documentservice.dto.FormResponse;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductResponse;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductRequest;
 import com.mtit.microservice.documentservice.documentservice.service.FormService;
@@ -32,8 +33,14 @@ public class ProductController {
 
     @PostMapping("/contact")
     @ResponseStatus(HttpStatus.CREATED)
-    public void formSubmition(@RequestBody FromRequest fromRequest) throws IOException {
-        formService.formSubmission(fromRequest);
+    public String formSubmition(@RequestBody FormRequest fromRequest) throws IOException {
+        return(formService.formSubmission(fromRequest));
+    }
+
+    @GetMapping("/contact")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FormResponse> getAllForms(){
+        return formService.getAllForms();
     }
 
     @PostMapping("/Product")

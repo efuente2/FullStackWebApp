@@ -16,17 +16,18 @@
                     <div class="tile">
                         <div class="tile is-parent">
                             <article class="tile is-child notification is-link">
+                                
                                 <div class="field">
                                     <label class="label has-text-white">Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" [(ngModel)]="fname" placeholder="First and Last Name">
+                                        <input class="input" type="text" [(ngModel)]="name" placeholder="First and Last Name" required>
                                     </div>
                                 </div>
                                 
                                 <div class="field">
                                     <label class="label has-text-white">Email</label>
                                     <div class="control">
-                                        <input class="input" type="email" [(ngModel)]="femail" placeholder="example@gmail.com">
+                                        <input class="input" type="text" [(ngModel)]="email" placeholder="example@gmail.com" required>
                                     </div>
                                 </div>
                                 
@@ -34,7 +35,7 @@
                                     <label class="label has-text-white">Subject</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select [(ngModel)]="fsubject">
+                                            <select [(ngModel)]="subject" required>
                                                 <option>Select dropdown</option>
                                                 <option>Order question</option>
                                                 <option>Shipping question</option>
@@ -47,7 +48,7 @@
                                 <div class="field">
                                     <label class="label has-text-white">Message</label>
                                     <div class="control">
-                                        <textarea class="textarea" [(ngModel)]="fmessage" placeholder="Textarea"></textarea>
+                                        <textarea class="textarea" type="text" [(ngModel)]="message" placeholder="Add you message here" required></textarea>
                                     </div>
                                 </div>
                                 
@@ -67,6 +68,7 @@
                                         <button class="button is-link is-light">Cancel</button>
                                     </div>
                                 </div>
+
                             </article>
                         </div>
                     </div>

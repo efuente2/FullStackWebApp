@@ -1,33 +1,32 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { from } from 'rxjs';
 import { FormService } from '../services/form.service';
+import { Form } from './form';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
-  fname!: string;
-  femail!: string;
-  fsubject!: string;
-  fmessage!: string;
+  name!: string;
+  email!: string;
+  subject!: string;
+  message!: string;
 
+  contactForm: Form = new Form(this.name, this.email, this.subject, this.message);
 
-  constructor(private _snackbar: MatSnackBar, private formService: FormService) { }
+  constructor(private _snackbar: MatSnackBar, private formService: FormService, private http:HttpClient) { }
 
-submit(){
-  this._snackbar.open('Thank you for your question will get back to you as soon as possible', 'Close', { duration: 3000 }); 
+  ngOnInit(): void {
+  }
 
-  this.formService.submitForm(this.fname, this.femail, this.fsubject, this.fmessage).subscribe(
-    (data: any) => {
-      console.log(data);
-    },
-    (error: any) => {
-      console.log(error);
-    }
-  );
-}
+  submit(){
+    console.log(this.contactForm);
+    this.formService.submitForm({form: this.contactForm});
 
+  }
 }

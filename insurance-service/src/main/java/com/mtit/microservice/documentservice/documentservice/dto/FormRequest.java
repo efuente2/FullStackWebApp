@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class FromRequest {
-    private int id;
+public class FormRequest{
     private String name;
     private String email;
     private String subject;
     private String message;
+
+
 
 }

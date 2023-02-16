@@ -31,7 +31,6 @@ public class ProductService {
 
     public void newTransaction (ProductRequest paymentRequest, MultipartFile file) throws IOException {
         Product product = Product.builder()
-                .id(paymentRequest.getId())
                 .Price(paymentRequest.getPrice())
                 .Title(paymentRequest.getTitle())
                 .Category(paymentRequest.getCategory())
@@ -85,8 +84,6 @@ public class ProductService {
     public List<ProductResponse> getAllClaims(){
         List<Product> productList = productRepositroy.findAll();
 
-        //return productList;
-
         return productList.stream().map(this::mapToClaimResponse).toList();
     }
 
@@ -105,9 +102,7 @@ public class ProductService {
     }
 
     public ProductResponse getClaimByID(int id){
-        //int finalId = Integer.parseInt(id);
         Optional<Product> paymentList = productRepositroy.findById(id);
-        //return (ProductResponse) paymentList.stream().map(this::mapToClaimResponse).toList();
         return paymentList.map(this::mapToClaimResponse).orElse(null);
     }
 
