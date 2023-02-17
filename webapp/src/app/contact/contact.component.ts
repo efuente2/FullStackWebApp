@@ -17,7 +17,7 @@ export class ContactComponent implements OnInit{
   subject!: string;
   message!: string;
 
-  contactForm: Form = new Form(this.name, this.email, this.subject, this.message);
+  contactForm:Form = new Form(this.name, this.email, this.subject, this.message);
 
   constructor(private _snackbar: MatSnackBar, private formService: FormService, private http:HttpClient) { }
 
