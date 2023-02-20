@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { Configuration, OpenAIApi } from 'openai';
-import { gptModels } from 'src/app/models/constants';
-import { ChatWithBot, ResponseModel } from 'src/app/models/gpt-response';
+import{Configuration, OpenAIApi} from 'openai';
 import { environment } from 'src/environments/environment';
+import { ChatWithBot, ResponseModel } from '../models/gpt-response';
+import { gptModels } from '../models/constants';
 
 @Component({
-  selector: 'app-start',
-  templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
 })
-export class StartComponent {
+export class ChatComponent {
 
-  chatConversation: ChatWithBot[]=[];
+ chatConversation: ChatWithBot[]=[];
 response!: ResponseModel | undefined;
     gptModels = gptModels
     promptText = '';
@@ -79,5 +79,7 @@ debugger;
       }
     }
   }
+
+  
 
 }
