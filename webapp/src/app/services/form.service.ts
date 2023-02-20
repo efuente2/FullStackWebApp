@@ -10,11 +10,23 @@ export class FormService {
 
   constructor(private http:HttpClient, private _snackbar: MatSnackBar) { }
 
-  public submitForm(form: { form: Form; }){
+  public submitForm(name: string, email: string, subject: string, message: string){
+
+    const contactForm: Form = new Form(
+      name,
+      email,
+      subject,
+      message
+    );
+
+    contactForm.setName(name);
+    contactForm.setEmail(email);
+    contactForm.setSubject(subject);
+    contactForm.setMessage(message);
   
-    console.log(form);
+    console.log(contactForm.name);
     
-    this.http.post("http://localhost:9090/contact", form, {responseType: 'text' as 'json'})
+    this.http.post("http://localhost:9090/contact", contactForm, {responseType: 'text' as 'json'})
     .subscribe(
       data => {
         console.log("POST Request is successful ", data);
