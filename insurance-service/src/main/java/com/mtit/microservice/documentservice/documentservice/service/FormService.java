@@ -58,4 +58,17 @@ public class FormService {
                 .build();
     }
 
+    public String deleteForm(int id){
+        if(formRepository.existsById(id)){
+            formRepository.deleteById(id);
+            log.info("Form " + id + " was deleted");
+            return "Form is deleted";
+        }
+        else{
+            log.info("Form " + id + " was not found");
+            return "Form is not found";
+        }
+
+    }
+
 }

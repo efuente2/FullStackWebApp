@@ -17,14 +17,21 @@ export class ContactComponent implements OnInit{
   subject!: string;
   message!: string;
 
-  constructor(private _snackbar: MatSnackBar, private formService: FormService, private http:HttpClient) { }
+  constructor(private _snackbar: MatSnackBar, private formService: FormService) { }
 
   ngOnInit(): void {
   }
 
   submit(){
 
+    if(this.name==undefined || this.email==undefined || this.subject==undefined || this.message==undefined){
+      this._snackbar.open("Please fill in all the fields", "Close", {
+        duration: 2000,
+      });
+    }
+    else{
     this.formService.submitForm(this.name, this.email, this.subject, this.message);
+    }
 
   }
 }

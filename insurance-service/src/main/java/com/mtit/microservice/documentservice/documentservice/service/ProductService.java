@@ -106,6 +106,16 @@ public class ProductService {
         return paymentList.map(this::mapToClaimResponse).orElse(null);
     }
 
+    public String DeleteProduct(int id){
+        if(productRepositroy.existsById(id)){
+            productRepositroy.deleteById(id);
+            return "Product " + id + " was deleted";
+        }
+        else {
+            return "Product " + id + " does not exist";
+        }
+    }
+
     public Product updateProductsByFields(int id, Map<String, Object> fields) {
         Optional<Product> existingClaim = productRepositroy.findById(id);
         if(existingClaim.isPresent()){

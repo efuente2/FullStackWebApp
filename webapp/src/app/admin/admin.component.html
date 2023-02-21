@@ -1,5 +1,10 @@
+<div class = "level-center">
+        <div class="level-right pt-4 ">
+            <button class="button is-warning" (click)="logout()">logout</button>
+        </div>
+</div>
 <div class = "level-left pt-4">
-    <aside class="menu">
+    <aside class="menu level-top">
         <p class="menu-label">
             Admin Dashboard
         </p>
@@ -30,34 +35,84 @@
             <div class="tile is-ancestor">
                 <div class="tile is-4 is-vertical is-parent">
                     <div class="tile is-child box">
-                        <p class="title">One</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
-                            vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+                        <p class="title">Messages</p>
+                            <article class="media" *ngFor="let message of messages">
+                                <div class="media-content">
+                                    <div class="content">
+                                        <p>
+                                            <strong>{{message.name}}</strong> <small>  {{message?.email}}  </small> 
+                                            <br>
+                                            <small> {{message?.subject}} </small>
+                                            <br>
+                                            {{message?.message}}
+                                        </p>
+                                    </div>
+                                </div>
+                                    <div class="media-right">
+                                        <button class="delete" (click)="deleteMessage(message.id)"></button>
+                                    </div>
+                            </article>
                     </div>
-                    <div class="tile is-child box">
-                        <p class="title">Two</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
-                            vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                    </div>
+
                 </div>
                 <div class="tile is-parent">
                     <div class="tile is-child box">
-                        <p class="title">Three</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar
-                            felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo
-                            sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
-                        <p>Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque
-                            interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet
-                            erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida
-                            diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.</p>
-                        <p>Integer sollicitudin, tortor a mattis commodo, velit urna rhoncus erat, vitae congue lectus dolor
-                            consequat libero. Donec leo ligula, maximus et pellentesque sed, gravida a metus. Cras ullamcorper a
-                            nunc ac porta. Aliquam ut aliquet lacus, quis faucibus libero. Quisque non semper leo.</p>
+                        <article class="tile is-child notification is-link">
+                        <label class="label has-text-white">Add New Product</label>
+                            <div class="field">
+                                <label class="label has-text-white">Name</label>
+                                <div class="control">
+                                    <input class="input" type="text" [(ngModel)]="name" placeholder="Product Name" required>
+                                </div>
+                            </div>
+                        
+                            <div class="field">
+                                <label class="label has-text-white">Price</label>
+                                <div class="control">
+                                    <input class="input" type="text" [(ngModel)]="price" placeholder="$00.00" required>
+                                </div>
+                            </div>
+                        
+                            <div class="field">
+                                <label class="label has-text-white">Category</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select [(ngModel)]="category" required>
+                                            <option>Select dropdown</option>
+                                            <option>Electronics</option>
+                                            <option>Clothing</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="field">
+                                <label class="label has-text-white">Description</label>
+                                <div class="control">
+                                    <textarea class="textarea" type="text" [(ngModel)]="description" placeholder="Add you message here"
+                                        required></textarea>
+                                </div>
+                            </div>
+                        
+                            <div class="field">
+                                <label class="label has-text-white">Image</label>
+                                <div class="control">
+                                    <input type="file" (change)="fileChange($event)" required>
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link" (click)="submit()">Submit</button>
+                                </div>
+                                <div class="control">
+                                    <button class="button is-link is-light">Cancel</button>
+                                </div>
+                            </div>
+                        
+                        </article>
                     </div>
                 </div>
             </div>
 </div>
 
-<div class="level-right">
-       
-</div>

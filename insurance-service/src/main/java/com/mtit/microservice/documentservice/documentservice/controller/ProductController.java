@@ -43,6 +43,12 @@ public class ProductController {
         return formService.getAllForms();
     }
 
+    @DeleteMapping("/contact/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteForm(@PathVariable int id){
+        return formService.deleteForm(id);
+    }
+
     @PostMapping("/Product")
     @ResponseStatus(HttpStatus.CREATED)
     public void newClaim(@RequestBody ProductRequest paymentRequest, @RequestParam("file")MultipartFile file) throws IOException {
@@ -54,6 +60,13 @@ public class ProductController {
     public List<ProductResponse> getAllClaims(){
         return paymentService.getAllClaims();
     }
+
+    @DeleteMapping("/Product/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteClaim(@PathVariable("id") int id){
+        paymentService.DeleteProduct(id);
+    }
+
 
     @GetMapping("/Product/{id}")
     @ResponseStatus(HttpStatus.OK)
