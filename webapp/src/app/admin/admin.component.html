@@ -40,10 +40,13 @@
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <strong>{{message.name}}</strong> <small>  {{message?.email}}  </small> 
+                                            <strong>Sender:</strong>{{message.name}}
                                             <br>
-                                            <small> {{message?.subject}} </small>
+                                            <strong>Email: </strong>{{message?.email}}
                                             <br>
+                                            <strong>Subject: </strong>{{message?.subject}}
+                                            <br>
+                                            <strong>Message: </strong>
                                             {{message?.message}}
                                         </p>
                                     </div>
