@@ -35,4 +35,14 @@ export class FormService {
     );
 
   }
+
+  public replyMessage( email: String, subject: String, replyMessage: string){
+    this.http.post("http://localhost:9090/email", { email, subject, replyMessage}, {responseType: 'text' as 'json'})
+    .subscribe(
+      data => {
+        console.log("POST Request is successful ", data);
+        this._snackbar.open('Message sent', 'Close', { duration: 3000 }); 
+      }
+    );
+  }
 }

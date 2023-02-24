@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Meassage } from 'src/app/models/messages.model';
+import { FormService } from '../services/form.service';
 import { MessageService } from '../services/message.service';
 
 
@@ -17,13 +18,16 @@ export class AdminComponent {
   category!: string;
   image!: File;
 
+  replyMessage!: string;
+
   messages: Array<Meassage> | undefined;
   messageSubscriptions: Subscription | undefined;
 
-  constructor(private messageService: MessageService, private router:Router) { }
+  constructor(private messageService: MessageService, private router:Router, private formService: FormService) { }
 
   ngOnInit(): void {
     this.getallmessages();
+    this.showReply(0);
   }
 
   getallmessages() {
@@ -61,6 +65,19 @@ export class AdminComponent {
     formData.append('description', this.description);
     formData.append('category', this.category);
     formData.append('image', this.image);
+  }
+
+  showReply(id: number) {
+    if (id == 1) {
+      document.getElementById('reply')?.setAttribute('style', 'display:block');
+    }
+    else {
+      document.getElementById('reply')?.setAttribute('style', 'display:none');
+    }
+  } 
+
+  reply(email: String, subject: String) {
+    this.formService.replyMessage(email, subject, this.replyMessage)
   }
 
 

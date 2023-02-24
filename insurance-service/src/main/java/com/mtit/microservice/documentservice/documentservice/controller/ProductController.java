@@ -4,6 +4,7 @@ import com.mtit.microservice.documentservice.documentservice.dto.FormRequest;
 import com.mtit.microservice.documentservice.documentservice.dto.FormResponse;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductResponse;
 import com.mtit.microservice.documentservice.documentservice.dto.ProductRequest;
+import com.mtit.microservice.documentservice.documentservice.service.EmailSenderService;
 import com.mtit.microservice.documentservice.documentservice.service.FormService;
 import com.mtit.microservice.documentservice.documentservice.service.ProductService;
 import com.mtit.microservice.documentservice.documentservice.util.Product;
@@ -26,11 +27,25 @@ public class ProductController {
     @Autowired
     private FormService formService;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+
+    //login
     @GetMapping("/login")
     public String login(){
         return "Welcome to My WEB API";
     }
 
+    //email
+    @PostMapping("/email")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void sendEmail(@RequestBody Map<String, String> body) throws IOException {
+        emailSenderService.sendEmail(body.get("to"), body.get("subject"), body.get("content"));
+    }
+
+
+    //contact
     @PostMapping("/contact")
     @ResponseStatus(HttpStatus.CREATED)
     public String formSubmition(@RequestBody FormRequest fromRequest) throws IOException {
@@ -49,6 +64,8 @@ public class ProductController {
         return formService.deleteForm(id);
     }
 
+
+    //product
     @PostMapping("/Product")
     @ResponseStatus(HttpStatus.CREATED)
     public void newClaim(@RequestBody ProductRequest paymentRequest, @RequestParam("file")MultipartFile file) throws IOException {

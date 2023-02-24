@@ -1,7 +1,7 @@
 export interface Meassage {
     id: number;
     name: string;
-    email: number;
+    email: string;
     subject: string;
     message: string;
 }
