@@ -36,8 +36,8 @@ export class FormService {
 
   }
 
-  public replyMessage( email: String, subject: String, replyMessage: string){
-    this.http.post("http://localhost:9090/email", { email, subject, replyMessage}, {responseType: 'text' as 'json'})
+  public replyMessage( to: String, subject: String, content: string){
+    this.http.post("http://localhost:9090/email", { to, subject, content}, {responseType: 'text' as 'json'})
     .subscribe(
       data => {
         console.log("POST Request is successful ", data);

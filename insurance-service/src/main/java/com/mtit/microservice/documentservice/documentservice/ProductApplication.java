@@ -1,8 +1,13 @@
 package com.mtit.microservice.documentservice.documentservice;
 
+import com.mtit.microservice.documentservice.documentservice.service.EmailSenderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -10,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableWebSecurity
 public class ProductApplication {
+	@Autowired
+	private EmailSenderService emailSenderService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductApplication.class, args);
@@ -23,5 +30,10 @@ public class ProductApplication {
 				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
 			};
 		};
+	}
+
+	@EventListener(ApplicationReadyEvent.class)
+	public void doSomethingAfterStartup() {
+		//emailSenderService.sendEmail("earnestofuentes@gmail.com", "Test", "Test");
 	}
 }

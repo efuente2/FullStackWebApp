@@ -77,7 +77,10 @@ export class AdminComponent {
   } 
 
   reply(email: String, subject: String) {
-    this.formService.replyMessage(email, subject, this.replyMessage)
+    localStorage.setItem('email', email.toString());
+    localStorage.setItem('subject', subject.toString());
+    this.router.navigate(["/replyForm"]);
+    //this.formService.replyMessage(email, subject, this.replyMessage)
   }
 
 

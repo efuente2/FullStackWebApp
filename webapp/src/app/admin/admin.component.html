@@ -49,20 +49,9 @@
                                             <strong>Message: </strong>
                                             {{message?.message}}
                                         </p>
+                                        <button class="button is-success" (click)="reply(message.email, message.subject)">Reply</button>
                                     </div>
                                 </div>
-                                    <div class="media-bottom" id="reply">
-                                        <div class="field">
-                                            <label for="" class="label">Message</label>
-                                            <input class="input" type="Text" name="username" [(ngModel)]="replyMessage" id="email"
-                                                placeholder="Add Your Reply" required>
-                                            <div class="field">
-                                                <button class="button is-success" (click)="reply(message.email, message.subject)">Reply</button>
-                                                <button class="button is-warning">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
                                     <div class="media-right">
                                         <button class="delete" (click)="deleteMessage(message.id)"></button>
                                     </div>

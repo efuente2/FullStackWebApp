@@ -34,6 +34,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { AdminComponent } from './admin/admin.component';
+import { ReplyFormComponent } from './admin/reply-form/reply-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AdminComponent } from './admin/admin.component';
     AboutComponent,
     ContactComponent,
     ChatComponent,
-    AdminComponent
+    AdminComponent,
+    ReplyFormComponent
   ],
   imports: [
     BrowserModule,
